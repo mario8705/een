@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import GLTFLoader from 'three-gltf-loader';
+const OrbitControls = require('three-orbit-controls')(THREE);
 
 class Game {
     constructor(width = 1280, height = 720) {
@@ -28,8 +29,12 @@ class Game {
         lumiere.position.set( 50, 0, 100 );
         this.scene.add( lumiere );
 
+        this.scene.add(new THREE.AmbientLight(0x606060));
+
         this.camera.rotateY(90);
         this.camera.position.set(30, 0, 0);
+
+        const controls = new OrbitControls(this.camera, this.renderer.domElement);
     }
 
     run() {
