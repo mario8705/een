@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import GLTFLoader from 'three-gltf-loader';
+import Sky from 'three-sky';
 const OrbitControls = require('three-orbit-controls')(THREE);
 
 class Game {
@@ -7,11 +8,17 @@ class Game {
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize(width, height);
 
+        this.renderer.setPixelRatio(window.devicePixelRatio);
+
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(60, width / height, 0.3, 100.0);
         this.scene.add(this.camera);
 
         this.camera.position.set(0, 0, 30);
+
+        const sky = new Sky();
+        sky.scale.setScalar(80);
+        this.scene.add(sky);
 
         // DEBUG
         this.renderer.setClearColor(0x336699, 1.0);
