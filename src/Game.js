@@ -5,7 +5,7 @@ class Game {
     constructor(width = 1280, height = 720) {
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize(width, height);
-        
+
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(60, width / height, 0.3, 100.0);
         this.scene.add(this.camera);
@@ -23,11 +23,6 @@ class Game {
     init() {
         const loader = new GLTFLoader();
         loader.load('assets/ship_light.gltf', object => this.scene.add(object.scene));
-
-        var geometry = new THREE.CubeGeometry( 10, 10, 10 );
-        var material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
-        var mesh = new THREE.Mesh( geometry, material );
-        this.scene.add( mesh );
 
         var lumiere = new THREE.DirectionalLight( 0xffffff, 1.0 );
         lumiere.position.set( 50, 0, 100 );
@@ -48,7 +43,7 @@ class Game {
     }
 
     render() {
-        
+
     }
 }
 
