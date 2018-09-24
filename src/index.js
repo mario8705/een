@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import Game from './Game';
 
-function render() {
-}
+const game = new Game();
+game.run();
