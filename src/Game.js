@@ -28,6 +28,13 @@ class Game {
         var material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
         var mesh = new THREE.Mesh( geometry, material );
         this.scene.add( mesh );
+
+        var lumiere = new THREE.DirectionalLight( 0xffffff, 1.0 );
+        lumiere.position.set( 50, 0, 100 );
+        this.scene.add( lumiere );
+
+        this.camera.rotateY(90);
+        this.camera.position.set(30, 0, 0);
     }
 
     run() {
