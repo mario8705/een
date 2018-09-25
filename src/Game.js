@@ -7,6 +7,7 @@ class Game {
         this.renderer.setSize(width, height);
         this.renderer.setPixelRatio(window.devicePixelRatio);
 
+
         this.width = width;
         this.height = height;
 
@@ -25,6 +26,8 @@ class Game {
         this.camera = currentScene.createCamera(this.width / this.height);
         this.scene = new THREE.Scene();
         this.scene.add(this.camera);
+        this.camera.minAzimuthAngle = -Math.PI / 2;
+        this.camera.maxAzimuthAngle = Math.PI / 2;
 
         currentScene.createScene(this.scene, this.renderer);
     }

@@ -42,7 +42,8 @@ class TestScene {
 
         const controls = new OrbitControls(this.camera, renderer.domElement);
         controls.enablePan = false;
-
+        controls.minPolarAngle = 0;
+        controls.maxPolarAngle = Math.PI / 2;
         this.sky = new Sky();
         scene.add(this.sky);
         this.sky.scale.addScalar(90);
