@@ -1,7 +1,4 @@
-import * as THREE from 'three';
-import GLTFLoader from 'three-gltf-loader';
-import Sky from 'three-sky';
-const OrbitControls = require('three-orbit-controls')(THREE);
+import * as THREE from 'three-full';
 
 class TestScene {
     createCamera(aspect) {
@@ -9,7 +6,7 @@ class TestScene {
     }
 
     createScene(scene, renderer) {
-        const loader = new GLTFLoader();
+        const loader = new THREE.GLTFLoader();
         loader.load('assets/ship_light.gltf', gltf => {
             gltf.scene.traverse(node => {
                 if (node instanceof THREE.Mesh) {
@@ -40,14 +37,15 @@ class TestScene {
         this.camera.rotateY(90);
         this.camera.position.set(30, 0, 0);
 
-        const controls = new OrbitControls(this.camera, renderer.domElement);
+        const controls = new THREE.OrbitControls(this.camera, renderer.domElement);
         controls.enablePan = false;
 
-        this.sky = new Sky();
+        this.sky = new THREE.Sky();
         scene.add(this.sky);
         this.sky.scale.addScalar(90);
 
-//        const water = new THREE.Water();
+        // const water = new THREE.Ocean();
+        
     }
 
     time = 0;
