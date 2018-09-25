@@ -31,7 +31,7 @@ class TestScene {
         sunLight.shadow.mapSize.width = 2048;
         sunLight.shadow.mapSize.height = 2048;
         sunLight.shadow.camera.near = 3;
-        sunLight.shadow.camera.far = this.camera.far;   
+        sunLight.shadow.camera.far = this.camera.far;
        // sunLight.shadow.bias = 0.00039;
         sunLight.castShadow = true;
 
@@ -41,6 +41,7 @@ class TestScene {
         this.camera.position.set(30, 0, 0);
 
         const controls = new OrbitControls(this.camera, renderer.domElement);
+        controls.enablePan = false;
     }
 
     update(tpf) {
