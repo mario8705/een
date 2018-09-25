@@ -1,19 +1,25 @@
 import * as THREE from 'three-full';
 
 class TestScene {
+    constructor() {
+        this.boat = null;
+    }
+
     createCamera(aspect) {
         return this.camera = new THREE.PerspectiveCamera(60, aspect, 0.3, 1000.0);
     }
 
     createScene(scene, renderer) {
         const loader = new THREE.GLTFLoader();
-        loader.load('assets/ship_light.gltf', gltf => {
+        loader.load('assets/bato.gltf', gltf => {
             gltf.scene.traverse(node => {
-                if (node instanceof THREE.Mesh) {
+                if (node.isMesh) {
                     node.castShadow = true;
                     node.receiveShadow = true;
                 }
             });
+
+            this.boat = gltf.scenes[0].children;
 
             scene.add(gltf.scene);
         });
@@ -27,7 +33,7 @@ class TestScene {
 
         this.sunLight.shadow.mapSize.width = 2048;
         this.sunLight.shadow.mapSize.height = 2048;
-        this.sunLight.shadow.camera.near = 3;
+        this.sunLight.shadow.camera.near = 0.1;
         this.sunLight.shadow.camera.far = this.camera.far;
        // sunLight.shadow.bias = 0.00039;
         this.sunLight.castShadow = true;
@@ -40,15 +46,34 @@ class TestScene {
         const controls = new THREE.OrbitControls(this.camera, renderer.domElement);
         controls.enablePan = false;
         controls.minPolarAngle = 0;
-        controls.maxPolarAngle = Math.PI / 2;
-        controls.minDistance = 10;
-        controls.maxDistance = 45;
+        controls.maxPolarAngle = Math.PI / 2 - 0.4;
+        controls.minDistance = 45;
+        controls.maxDistance = 100;
         this.sky = new THREE.Sky();
         scene.add(this.sky);
         this.sky.scale.addScalar(900);
 
-        // const water = new THREE.Ocean();
+        var waterGeometry = new THREE.PlaneBufferGeometry( 10000, 10000 );
+        this. water = new THREE.Water(
+            waterGeometry,
+            {
+                textureWidth: 512,
+                textureHeight: 512,
+                waterNormals: new THREE.TextureLoader().load( 'assets/waternormals.jpg', function ( texture ) {
+                    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+                }),
+                alpha: 1.0,
+                sunDirection: this.sunLight.position.clone().normalize(),
+                sunColor: 0xffffff,
+                waterColor: 0x001e0f,
+                distortionScale:  3.7,
+                fog: scene.fog !== undefined
+            }
+        );
+        this.water.rotation.x = - Math.PI / 2;
+        scene.add( this.water );
 
+        this.water.position.set(0, 5.5, 0);
     }
 
     time = 0;
@@ -61,10 +86,19 @@ class TestScene {
         uniforms.mieCoefficient.value = 0.005;
         uniforms.mieDirectionalG.value = 0.8;
 
+        this.water.material.uniforms.time.value += 1.0 / 60.0;
+
         let inclination = this.time / 100;
         let azimuth = 0.25;
 
         const distance = 100;
+
+        if (this.boat) {
+            for (let o of this.boat) {
+                o.rotation.y = Math.cos(this.time) * 0.08;
+                o.position.set(0, Math.sin(this.time) * 1.5 + 1, 0);
+            }
+        }
 
         const theta = Math.PI * ( inclination - 0.5 );
         const phi = 2 * Math.PI * ( azimuth - 0.5 );
