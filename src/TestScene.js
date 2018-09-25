@@ -43,9 +43,9 @@ class TestScene {
         controls.maxPolarAngle = Math.PI / 2;
         controls.minDistance = 10;
         controls.maxDistance = 45;
-        this.sky = new Sky();
+        this.sky = new THREE.Sky();
         scene.add(this.sky);
-        this.sky.scale.addScalar(90);
+        this.sky.scale.addScalar(900);
 
         // const water = new THREE.Ocean();
 
