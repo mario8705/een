@@ -47,13 +47,7 @@ class TestScene {
         scene.add(this.sky);
         this.sky.scale.addScalar(90);
 
-        this.sunSphere = new THREE.Mesh(
-            new THREE.SphereBufferGeometry( 20000, 16, 8 ),
-            new THREE.MeshBasicMaterial( { color: 0xffffff } )
-        );
-        this.sunSphere.position.y = - 700000;
-        this.sunSphere.visible = false;
-        scene.add( this.sunSphere );
+//        const water = new THREE.Water();
     }
 
     time = 0;
@@ -66,10 +60,10 @@ class TestScene {
         uniforms.mieCoefficient.value = 0.005;
         uniforms.mieDirectionalG.value = 0.8;
 
-        let inclination = 0.49;
+        let inclination = this.time / 100;
         let azimuth = 0.25;
 
-        const distance = 50;
+        const distance = 100;
 
         const theta = Math.PI * ( inclination - 0.5 );
         const phi = 2 * Math.PI * ( azimuth - 0.5 );
