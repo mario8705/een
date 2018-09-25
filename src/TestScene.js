@@ -47,8 +47,8 @@ class TestScene {
         controls.enablePan = false;
         controls.minPolarAngle = 0;
         controls.maxPolarAngle = Math.PI / 2 - 0.4;
-        controls.minDistance = 45;
-        controls.maxDistance = 100;
+        controls.minDistance = 100;
+        controls.maxDistance = 300;
         this.sky = new THREE.Sky();
         scene.add(this.sky);
         this.sky.scale.addScalar(900);
@@ -97,8 +97,12 @@ class TestScene {
             for (let o of this.boat) {
                 o.rotation.y = Math.cos(this.time) * 0.08;
                 o.position.set(0, Math.sin(this.time) * 1.5 + 1, 0);
+
+                o.rotation.x = (Math.cos(this.time) * 0.08) + 89.55;
+                o.position.set(0, Math.sin(this.time) * 1.5 + 1, 0);
             }
         }
+
 
         const theta = Math.PI * ( inclination - 0.5 );
         const phi = 2 * Math.PI * ( azimuth - 0.5 );
