@@ -44,6 +44,8 @@ class TestScene {
         controls.enablePan = false;
         controls.minPolarAngle = 0;
         controls.maxPolarAngle = Math.PI / 2;
+        controls.minDistance = 10;
+        controls.maxDistance = 45;
         this.sky = new Sky();
         scene.add(this.sky);
         this.sky.scale.addScalar(90);
