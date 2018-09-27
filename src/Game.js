@@ -25,8 +25,8 @@ class Game {
         this.currentScene = currentScene;
         this.camera = currentScene.createCamera(this.width / this.height);
         this.scene = new THREE.Scene();
-        this.scene.add(this.camera);
-        
+        //this.scene.add(this.camera);
+
 
         currentScene.createScene(this.scene, this.renderer);
     }

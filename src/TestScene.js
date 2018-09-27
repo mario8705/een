@@ -1,8 +1,38 @@
 import * as THREE from 'three-full';
 
+import Boat from './Boat';
+
 class TestScene {
     constructor() {
-        this.boat = null;
+        this.boat = new Boat();
+
+        window.addEventListener('keydown', (evt) => {
+          switch (evt.keyCode) {
+            case 68:
+              this.boat.turn("right");
+              break;
+            case 81:
+              this.boat.turn("left");
+              break;
+            case 90:
+              this.boat.moveForward();
+              break;
+          }
+        });
+
+        window.addEventListener('keyup', (evt) => {
+          switch (evt.keyCode) {
+            case 68:
+              this.boat.stopTurning("right");
+              break;
+            case 81:
+              this.boat.stopTurning("left");
+              break;
+            case 90:
+              this.boat.stopMovingForward();
+              break;
+          }
+        });
     }
 
     createCamera(aspect) {
@@ -15,24 +45,13 @@ class TestScene {
         this.islands = islands;
 
         for (const island of islands) {
-            
+
         }
     }
 
     createScene(scene, renderer) {
         const loader = new THREE.GLTFLoader();
-        loader.load('assets/bato.gltf', gltf => {
-            gltf.scene.traverse(node => {
-                if (node.isMesh) {
-                    node.castShadow = true;
-                    node.receiveShadow = true;
-                }
-            });
-
-            this.boat = gltf.scenes[0].children;
-
-            scene.add(gltf.scene);
-        });
+        this.boat.load(loader, scene, this.camera);
 
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -50,13 +69,10 @@ class TestScene {
 
         scene.add(new THREE.AmbientLight(0x606060));
 
-        this.camera.rotateY(90);
-        this.camera.position.set(30, 0, 0);
-
         const controls = new THREE.OrbitControls(this.camera, renderer.domElement);
         controls.enablePan = false;
         controls.minPolarAngle = 0;
-        controls.maxPolarAngle = Math.PI / 2 - 0.4;
+        controls.maxPolarAngle = (Math.PI / 2) - (Math.PI / 18);
         controls.minDistance = 100;
         controls.maxDistance = 300;
         this.sky = new THREE.Sky();
@@ -83,7 +99,7 @@ class TestScene {
         this.water.rotation.x = - Math.PI / 2;
         scene.add( this.water );
 
-        this.water.position.set(0, 5.5, 0);
+        this.water.position.set(0, 5.3, 0);
     }
 
     time = 0;
@@ -103,16 +119,7 @@ class TestScene {
 
         const distance = 100;
 
-        if (this.boat) {
-            for (let o of this.boat) {
-                o.rotation.y = Math.cos(this.time) * 0.08;
-                o.position.set(0, Math.sin(this.time) * 1.5 + 1, 0);
-
-                o.rotation.x = (Math.cos(this.time) * 0.08) + 89.55;
-                o.position.set(0, Math.sin(this.time) * 1.5 + 1, 0);
-            }
-        }
-
+        this.boat.update(this.time);
 
         const theta = Math.PI * ( inclination - 0.5 );
         const phi = 2 * Math.PI * ( azimuth - 0.5 );
