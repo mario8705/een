@@ -1,0 +1,112 @@
+{
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5123,
+            "count" : 15606,
+            "max" : [
+                8583
+            ],
+            "min" : [
+                0
+            ],
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 8584,
+            "max" : [
+                5.681818008422852,
+                2.4218239784240723,
+                5.681818008422852
+            ],
+            "min" : [
+                -5.681818008422852,
+                -1.690833568572998,
+                -5.681818008422852
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 8584,
+            "max" : [
+                0.9957072138786316,
+                1.0,
+                0.9963012933731079
+            ],
+            "min" : [
+                -0.9962664246559143,
+                0.08241435885429382,
+                -0.9953261017799377
+            ],
+            "type" : "VEC3"
+        }
+    ],
+    "asset" : {
+        "generator" : "Khronos Blender glTF 2.0 exporter",
+        "version" : "2.0"
+    },
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 31212,
+            "byteOffset" : 0,
+            "target" : 34963
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 103008,
+            "byteOffset" : 31212,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 103008,
+            "byteOffset" : 134220,
+            "target" : 34962
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 237228,
+            "uri" : "island01.bin"
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Plane",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "NORMAL" : 2,
+                        "POSITION" : 1
+                    },
+                    "indices" : 0
+                }
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "Plane",
+            "scale" : [
+                17.600000381469727,
+                17.600000381469727,
+                17.600000381469727
+            ]
+        }
+    ],
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ]
+}

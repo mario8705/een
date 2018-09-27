@@ -9,13 +9,19 @@ class TestScene {
         return this.camera = new THREE.PerspectiveCamera(60, aspect, 0.3, 1000.0);
     }
 
-    loadIslands() {
+    loadIslands(scene) {
         const islands = require('./islands');
         const loader = new THREE.GLTFLoader();
         this.islands = islands;
 
         for (const island of islands) {
-            
+            loader.load(island.model, gltf => {
+                for (const obj of gltf.scene.children) {
+                    obj.position.set(...island.worldPos);
+                    obj.scale.set(...island.modelScale);
+                }
+                scene.add(gltf.scene);
+            });
         }
     }
 
@@ -34,6 +40,8 @@ class TestScene {
             scene.add(gltf.scene);
         });
 
+        this.loadIslands(scene);
+
         renderer.shadowMap.enabled = true;
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -41,7 +49,7 @@ class TestScene {
         this.sunLight.position.set(50, 50, 50);
         scene.add(this.sunLight);
 
-        this.sunLight.shadow.mapSize.width = 2048;
+        this.sunLight.shadow.mapSize.width  = 2048;
         this.sunLight.shadow.mapSize.height = 2048;
         this.sunLight.shadow.camera.near = 0.1;
         this.sunLight.shadow.camera.far = this.camera.far;

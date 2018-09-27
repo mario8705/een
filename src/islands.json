@@ -3,9 +3,13 @@
         "id": 1,
         "name": "Test Island",
         "model": "assets/island01.gltf",
-        "lavaLevel": 10,
-        "radius": "UNKNOWN \"/!\"",
+        "lavaPlane": {
+            "min": [ 0, 0, 0 ],
+            "max": [ 0, 0, 0 ]
+        },
+        "radius": "UNKNOWN",
         "center": "0 0 0",
-        "worldPos": [ 0, 0, 0 ]
+        "worldPos": [ 0, 0, 50 ],
+        "modelScale": [ 50, 50, 50 ]
     }
 ]
