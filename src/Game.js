@@ -1,5 +1,7 @@
 import * as THREE from 'three-full';
 import TestScene from './TestScene';
+import IslandScene from './IslandScene';
+import Input from './Input';
 
 class Game {
     constructor(width = 1280, height = 720) {
@@ -7,6 +9,7 @@ class Game {
         this.renderer.setSize(width, height);
         this.renderer.setPixelRatio(window.devicePixelRatio);
 
+        Input.hook();
 
         this.width = width;
         this.height = height;
@@ -32,7 +35,7 @@ class Game {
     }
 
     init() {
-        this.loadScene(new TestScene());
+        this.loadScene(new IslandScene());
     }
 
     run() {
