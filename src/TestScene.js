@@ -9,6 +9,16 @@ class TestScene {
         return this.camera = new THREE.PerspectiveCamera(60, aspect, 0.3, 1000.0);
     }
 
+    loadIslands() {
+        const islands = require('./islands');
+        const loader = new THREE.GLTFLoader();
+        this.islands = islands;
+
+        for (const island of islands) {
+            
+        }
+    }
+
     createScene(scene, renderer) {
         const loader = new THREE.GLTFLoader();
         loader.load('assets/bato.gltf', gltf => {

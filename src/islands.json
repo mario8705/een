@@ -1,0 +1,11 @@
+[
+    {
+        "id": 1,
+        "name": "Test Island",
+        "model": "assets/island01.gltf",
+        "lavaLevel": 10,
+        "radius": "UNKNOWN \"/!\"",
+        "center": "0 0 0",
+        "worldPos": [ 0, 0, 0 ]
+    }
+]
